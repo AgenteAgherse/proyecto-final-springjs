@@ -1,0 +1,24 @@
+./database/project/HELP.md
+./database/project/target/
+./database/project/!.mvn/wrapper/maven-wrapper.jar
+./database/project/!**/src/main/**/target/
+./database/project/!**/src/test/**/target/
+
+### STS ###
+./database/project/.apt_generated
+./database/project/.classpath
+./database/project/.factorypath
+./database/project/.project
+./database/project/.settings
+./database/project/.springBeans
+./database/project/.sts4-cache
+
+### IntelliJ IDEA ###
+./database/project/.idea
+./database/project/*.iws
+./database/project/*.iml
+./database/project/*.ipr
+
+./database/mer.drawio
+./database/project.zip
+./database/modelo_relacion.xml
