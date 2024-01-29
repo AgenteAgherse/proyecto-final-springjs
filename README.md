@@ -80,4 +80,6 @@ La base de datos va a estar formada a partir de 4 entidades. Estas entidades son
 El diagrama Entidad Relación de la base de datos es la siguiente.
 ![Diagrama Entidad Relación](./database/mer.png)
 
-        
+## Endpoints
+El proyecto está configurado para que la ruta principal sea
+ ```http://localhost:9090/api```
