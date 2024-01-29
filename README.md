@@ -83,3 +83,16 @@ El diagrama Entidad Relación de la base de datos es la siguiente.
 ## Endpoints
 El proyecto está configurado para que la ruta principal sea
  ```http://localhost:9090/api```
+
+Las rutas que le siguen por entidad son las siguientes:
+
+* **Persona:** /person-data
+    * ***Peticiones:*** POST, GET, PUT, DELETE
+* **Usuario (Contraseña):** ```/users```
+    * ***Peticiones:*** POST, GET, PUT, DELETE
+* **Registros:** ```/person-data/records```
+    * ***Peticiones:*** POST, GET
+* **Resumen:** ```/person-data/stats```
+    * ***Peticiones:*** GET
+* **Comments:** ```/person-data/records/{id}/comments```
+    * ***Peticiones:*** POST, GET
