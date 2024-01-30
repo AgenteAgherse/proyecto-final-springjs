@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/person-data")
+@CrossOrigin("*")
 public class PersonController {
     @Autowired
     private PersonService personService;
@@ -19,20 +20,16 @@ public class PersonController {
         return personService.findById(id);
     }
 
-    @PostMapping("/create")
-    public void create(@RequestBody Person Person) {
-        personService.addUpdate(Person);
+    @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void create(@RequestBody Person person) {
+        person.setIdentification(person.getIdentification());
+        personService.addUpdate(person);
     }
 
     @PutMapping("/actualizar")
     public void update(@RequestBody Person Person) {
-        if (personService.findById(Person.getId()) == null) return;
+        if (personService.findById(Person.getIdentification()) == null) return;
         personService.addUpdate(Person);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Integer id) {
-        personService.deleteById(id);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.project.project.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,7 +23,6 @@ public class Comment
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "details_id", nullable = false, updatable = false)
-    private Registro registro;
-
+    @JoinColumn(name = "details_id")
+    private Registro record;
 }

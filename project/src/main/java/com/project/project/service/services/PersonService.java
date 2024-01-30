@@ -14,11 +14,7 @@ public class PersonService {
     private PersonRepository personRepository;
 
     public void addUpdate(Person person) {
-        personRepository.save(person);
-    }
-
-    public List<Person> findAll() {
-        return personRepository.findAll();
+        System.out.println(personRepository.save(person).toString());
     }
 
     public Person findById(Integer id) {

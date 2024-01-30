@@ -12,9 +12,7 @@ import java.util.List;
 @Data
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "identification")
-    private Integer id;
+    private Integer identification;
 
     @Column(name = "document_type")
     private String doc_type;
@@ -29,10 +27,6 @@ public class Person {
     @JsonManagedReference
     @OneToMany(cascade=CascadeType.ALL , mappedBy = "persona")
     private List<Registro> registros;
-
-    @JsonManagedReference
-    @OneToOne(mappedBy = "persona")
-    private User usuario;
 
 
     @JsonManagedReference

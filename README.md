@@ -41,12 +41,6 @@ La base de datos va a estar formada a partir de 4 entidades. Estas entidades son
         * ***email:*** Correo electrónico de la persona registrada.
         * ***saves_percent:*** Porcentaje que la persona debe de tener para ahorros.
 
-* Contraseña:
-    * **Descripción:** Tabla que va a guardar la información de las contraseñas de las personas. Contiene los siguientes atributos:
-        * ***user_id:*** [PK, Integer, Auto-increment] Identificación del usuario.
-        * ***Identificación:*** [FK, Integer]: Identificación de la persona.
-        * ***Contraseña:*** [TEXT]: Contraseña de la persona. Esta contraseña va a estar encriptada bajo el estándar de encriptación SHA.
-
 * Cambios Mensuales:
     * **Descripción:** Esta tabla se va a encargar de guardar un historial de los ingresos y egresos que la persona ha tenido por mes. Los atributos son los que se presentan a continuación.
 
@@ -86,10 +80,8 @@ El proyecto está configurado para que la ruta principal sea
 
 Las rutas que le siguen por entidad son las siguientes:
 
-* **Persona:** /person-data
-    * ***Peticiones:*** POST, GET, PUT, DELETE
-* **Usuario (Contraseña):** ```/users```
-    * ***Peticiones:*** POST, GET, PUT, DELETE
+* **Persona:** ```/person-data```
+    * ***Peticiones:*** POST, GET, PUT
 * **Registros:** ```/person-data/records```
     * ***Peticiones:*** POST, GET
 * **Resumen:** ```/person-data/stats```

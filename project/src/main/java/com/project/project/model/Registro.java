@@ -1,7 +1,9 @@
 package com.project.project.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -26,6 +28,6 @@ public class Registro {
     private Person persona;
 
     @JsonManagedReference
-    @OneToMany(cascade=CascadeType.ALL , mappedBy = "registro")
+    @OneToMany(cascade=CascadeType.ALL , mappedBy = "record", orphanRemoval = true)
     private List<Comment> comentarios;
 }

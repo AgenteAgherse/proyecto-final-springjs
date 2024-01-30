@@ -21,7 +21,7 @@ public class ResumenService {
     }
 
     public Resumen findById(Integer id) {
-        return resumenRepository.findById(id).orElse(null);
+        return resumenRepository.findById(id).orElse(new Resumen());
     }
 
     public void deleteById(Integer id) {

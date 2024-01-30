@@ -24,10 +24,7 @@ public class RegistroService {
     }
 
     public Registro findById(Integer id) {
-        return registerRepository.findById(id).orElse(null);
+        return registerRepository.findById(id).orElse(new Registro());
     }
 
-    public void deleteById(Integer id) {
-        registerRepository.deleteById(id);
-    }
 }
