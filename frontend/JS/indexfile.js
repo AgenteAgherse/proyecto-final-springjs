@@ -63,8 +63,8 @@ function Create(ruta, newData) {
     });
 }
 
-function Update(ruta, id, updatedData) {
-    return fetch(`${ruta}/${id}`, {
+function Update(ruta, updatedData) {
+    return fetch(`${ruta}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ function Update(ruta, id, updatedData) {
     })
     .then(response => response.json())
     .catch(error => {
-        console.error('Error en updateData:', error);
+        console.log('Error en updateData:', error);
         throw error;
     });
 }
@@ -276,4 +276,81 @@ function subirRegistro(person_id) {
     Create(absoluteRoute + `/person-data/${person_id}/newRecord`, registro);
     alert('Registro agregado.');
     window.location.href = './index.html';
+}
+
+function buscarUsuario() {
+    const id = document.getElementById('search-id').value;
+    const uploadButton = document.getElementById('update-button');
+    console.log(id);
+    if (id == '' || id == undefined) {
+        clear();
+        uploadButton.innerHTML = `
+                <button class="btn btn-primary form-control" onclick="createPerson()">Enviar</button>
+        `;
+        return;
+    }
+    Select(absoluteRoute + `/person-data/${id}`).then( person => {
+        if (person['identification'] == null || person['identification'] == undefined) {
+            alert('Persona no encontrada');
+            uploadButton.innerHTML = `
+                <button class="btn btn-primary form-control" onclick="createPerson()">Enviar</button>
+            `;
+            return;
+        }
+
+        document.getElementById('identification').value = person['identification'];
+        document.getElementById('documentType').selected = person['doc_type'];
+        document.getElementById('names').value = person['names'];
+        document.getElementById('surname').value = person['surname'];
+        document.getElementById('workingOn').value = person['working_on'];
+        document.getElementById('email').value = person['email'];
+        document.getElementById('savesPercent').value = person['saves_percent'];
+        document.getElementById('birthday').value = person['birthday'];
+        uploadButton.innerHTML = `
+                <button class="btn btn-warning form-control" onclick="actualizarUsuario()">Actualizar Usuario</button>
+        `;
+    })
+    .catch(error => console.log(error));
+}
+
+function actualizarUsuario() {
+    const id = document.getElementById("identification").value;
+    const isCreated = Select(absoluteRoute + `/person-data/${id}`).then(data => {
+        if (data['id'] != undefined) {
+            alert('Persona creada con anterioridad');
+            return;
+        }
+    });
+    let formPerson = document.getElementById("newperson");
+    let personData = new FormData(formPerson);
+
+    personData.forEach(function (value, key) {
+        if (key === 'documentType') {
+            person['doc_type'] = value;
+        }
+        else if (key === 'savesPercent') {
+            person['saves_percent'] = value;
+        }
+        else if (key === 'workingOn') {
+            person['working_on'] = value;
+        }
+        else {
+            person[key] = value;
+        }
+    });
+
+    
+    console.log(Update(absoluteRoute + `/person-data/actualizar/${id}`, person));
+    window.location.href = './index.html';
+}
+
+function clear() {
+    document.getElementById('identification').value = '';
+    document.getElementById('documentType').selected = '';
+    document.getElementById('names').value = '';
+    document.getElementById('surname').value = '';
+    document.getElementById('workingOn').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('savesPercent').value = '';
+    document.getElementById('birthday').value = '';
 }

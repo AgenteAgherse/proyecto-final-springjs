@@ -13,8 +13,13 @@
 
     <div class="container mt-5 text-center">
 
-        <h1 class="mb-4">Registrar Persona</h1>
+        <h1 class="mb-4">Registrar o Actualizar Persona</h1>
 
+        <label for="search-id">Ingrese acá la identificación si desea actualizar información: <br> <b>Si solo desea crear, deje este campo en blanco y dé click a buscar</b></label>
+        <div class="input-group mb-5 pb-5">
+            <input class="form-control" type="number" name="search-id" id="search-id" placeholder="Ingrese identificación">
+            <button class="btn btn-primary" onclick="buscarUsuario()">Buscar</button>
+        </div>
         <form id="newperson">
             <div class="form-group">
                 <label for="identification">Número de Identificación:</label>
@@ -60,9 +65,16 @@
                 <input type="date" class="form-control" id="birthday" name="birthday" required>
             </div>
 
-            <button class="btn btn-primary form-control mb-5" onclick="createPerson()">Enviar</button>
+            
         </form>
-        <a href="./index.html">Volver a Inicio</a>
+
+        <div id="update-button">
+            <button class="btn btn-primary form-control" onclick="createPerson()">Enviar</button>
+        </div>
+
+        <div class="mb-5">
+            <a href="./index.html">Volver a Inicio</a>
+        </div>
     </div>
 
     <!-- Agregar enlaces a los scripts de Bootstrap y jQuery (si es necesario) -->
