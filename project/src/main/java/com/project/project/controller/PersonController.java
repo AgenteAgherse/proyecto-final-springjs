@@ -26,10 +26,12 @@ public class PersonController {
         personService.addUpdate(person);
     }
 
-    @PutMapping("/actualizar")
-    public void update(@RequestBody Person Person) {
-        if (personService.findById(Person.getIdentification()) == null) return;
-        personService.addUpdate(Person);
+    @PutMapping(path = "/actualizar/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestBody Person person,@PathVariable Integer id) {
+        Person buscar = personService.findById(id);
+        if (buscar.getIdentification() == null) return;
+        person.setIdentification(id);
+        personService.addUpdate(person);
     }
 
 }
