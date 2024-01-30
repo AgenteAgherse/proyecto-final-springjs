@@ -74,6 +74,9 @@ La base de datos va a estar formada a partir de 4 entidades. Estas entidades son
 El diagrama Entidad Relación de la base de datos es la siguiente.
 ![Diagrama Entidad Relación](./database/mer.png)
 
+### Diagrama UML
+El diagrama UML que se presenta a continuación es una organización gráfica simplificada del proyecto.
+![Diagrama UML](./database/uml-simplificado.png)
 ## Endpoints
 El proyecto está configurado para que la ruta principal sea
  ```http://localhost:9090/api```
@@ -84,7 +87,29 @@ Las rutas que le siguen por entidad son las siguientes:
     * ***Peticiones:*** POST, GET, PUT
 * **Registros:** ```/person-data/records```
     * ***Peticiones:*** POST, GET
-* **Resumen:** ```/person-data/stats```
-    * ***Peticiones:*** GET
 * **Comments:** ```/person-data/records/{id}/comments```
     * ***Peticiones:*** POST, GET
+
+Visto de otra manera, las rutas obtenidas por los controladores junto con su tipo de petición son las siguientes:
+
+```http://localhost:9090/api/person-data```
+    |_ ***Personas***
+      |_ ```/{id}``` (GET): Obtiene la información de una persona en específico.
+      |_```/create```(POST): Crea una instancia en la base de datos de una persona.
+      |_```/actualizar/{id}``` (PUT): Actualiza la información de una persona a partir de la identificación y de la información guardada en el cuerpo JSON.
+    |_ ***Register*** -> Registro de ingresos y egresos del día.
+      |_```/{id}/newRecord``` (POST): Creación de un nuevo registro de ingresos y egresos de la persona buscada.
+      |_```/records/{id}``` (GET): Obtiene la información de un registro en específico.
+    |_***Comentarios***
+      |_```/{recordId}/create``` (POST): Publica la información de un comentario de un registro en específico.
+
+### **OBSERVACIONES A TENER EN CUENTA DENTRO DE LA API REST**
+    > Se omiten algunos endpoints dado a la naturaleza de las entidades. Por ejemplo, la entidad Resumen no cuenta con una publicación ni actualización de ahorros debido a que estos se generan de manera automática en la base de datos.
+
+    > No se eliminan registros debido a que se busca mantener un historial de los registros.
+
+    > Debido a las anotaciones @OneToMany como @ManyToOne, la información se mantiene dentro de algún elemento padre (ejemplo: Las estadísticas pueden ser tomadas directamente desde la persona).
+
+## Razones de por qué funciona el proyecto sin necesidad de hacer uso de un framework para el front.
+Javascript maneja funciones como fetch para obtener información externa. Al momento de buscar el link de nuestra API para saber la información, esta se obtiene por medio de promesas.
+Sin embargo, hay que tener en cuenta la anotación @CrossOrigin. Esta anotación brinda soporte del CORS haciendo que se puedan transferir los datos sin ningún problema.
