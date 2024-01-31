@@ -71,22 +71,7 @@ function Update(ruta, updatedData) {
         },
         body: JSON.stringify(updatedData),
     })
-    .then(response => response.json())
-    .catch(error => {
-        console.log('Error en updateData:', error);
-        throw error;
-    });
-}
-
-function Delete(ruta, id) {
-    return fetch(`${ruta}/${id}`, {
-        method: 'DELETE',
-    })
-    .then(response => response.json())
-    .catch(error => {
-        console.error('Error en deleteData:', error);
-        throw error;
-    });
+    .then(response => response.json());
 }
 
 
@@ -267,7 +252,7 @@ function subirComentario(record_id) {
     comment['description'] = nuevoComentario;
     console.log(comment);
     Create(absoluteRoute + `/person-data/records/${record_id}/create`, comment);
-    window.location.href = './index.html';
+    //window.location.href = './index.html';
 }
 
 function subirRegistro(person_id) {
@@ -339,12 +324,19 @@ function actualizarUsuario() {
         }
     });
 
+    console.log(person);
+    Update(absoluteRoute + `/person-data/actualizar/${id}`, person);
+    clear();
+    alert('Cambios realizados');
     
-    console.log(Update(absoluteRoute + `/person-data/actualizar/${id}`, person));
-    window.location.href = './index.html';
+    //window.location.href = './index.html';
 }
 
 function clear() {
+    const updateButton = document.getElementById('update-button');
+    uploadButton.innerHTML = `
+                <button class="btn btn-primary form-control" onclick="createPerson()">Enviar</button>
+        `;
     document.getElementById('identification').value = '';
     document.getElementById('documentType').selected = '';
     document.getElementById('names').value = '';
@@ -353,4 +345,5 @@ function clear() {
     document.getElementById('email').value = '';
     document.getElementById('savesPercent').value = '';
     document.getElementById('birthday').value = '';
+
 }
